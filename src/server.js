@@ -16,6 +16,31 @@ const VALID_STATUSES = [
 
 app.use(express.json());
 
+app.get("/api/leads", (req, res) => {
+  const sql = `
+    SELECT 
+      id,
+      name,
+      email,
+      phone,
+      product,
+      status,
+      created_at
+    FROM leads
+    ORDER BY created_at DESC
+  `;
+
+  db.all(sql, [], (error, rows) => {
+    if (error) {
+      return res.status(500).json({
+        message: "Erro ao listar leads.",
+      });
+    }
+
+    return res.json(rows);
+  });
+});
+
 app.post("/api/leads", (req, res) => {
   const { name, email, phone, product } = req.body;
 
