@@ -10,6 +10,7 @@ const VALID_STATUSES = [
   "novo",
   "em_contato",
   "interessado",
+  "proposta",
   "convertido",
   "perdido",
 ];
@@ -75,6 +76,48 @@ app.post("/api/leads", (req, res) => {
       phone,
       product,
       status: "novo",
+    });
+  });
+});
+
+app.patch("/api/leads/:id", (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  if (!status) {
+    return res.status(400).json({
+      message: "Status é obrigatório.",
+    });
+  }
+
+  if (!VALID_STATUSES.includes(status)) {
+    return res.status(400).json({
+      message: "Status inválido.",
+    });
+  }
+
+  const sql = `
+    UPDATE leads
+    SET status = ?
+    WHERE id = ?
+  `;
+
+  db.run(sql, [status, id], function (error) {
+    if (error) {
+      return res.status(500).json({
+        message: "Erro ao atualizar lead.",
+      });
+    }
+
+    if (this.changes === 0) {
+      return res.status(404).json({
+        message: "Lead não encontrado.",
+      });
+    }
+
+    return res.json({
+      id,
+      status: status,
     });
   });
 });
