@@ -1,14 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/output.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Leafth</title>
-</head>
-<body>
-    <section>
-        <h1>Hello Word!!!</h1>
-    </section>
-</body>
+  </head>
+  <body>
+    <header class="bg-primary text-white">
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-8"
+      >
+        <a href="#" class="flex items-center gap-2">
+          <img src="./assets/icons/icon_logo.png" alt="" />
+
+          <span class="text-xl font-bold tracking-tight">Leafth</span>
+        </a>
+
+        <div class="hidden items-center gap-8 text-sm font-medium md:flex">
+          <a href="#sobre" class="transition hover:text-secondary">Sobre nós</a>
+          <a href="#conga" class="transition hover:text-secondary">Conga</a>
+          <a href="#aria" class="transition hover:text-secondary">Aria</a>
+          <a href="#contato" class="transition hover:text-secondary">Contato</a>
+        </div>
+
+        <a
+          href="#contato"
+          class="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-3 gap-2 text-sm font-semibold text-white transition hover:bg-secondary/60"
+        >
+          Bora lá
+          <img src="./assets/icons/icon_arrow.png" alt="" />
+        </a>
+
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 md:hidden"
+          data-menu-button
+        >
+          <span class="sr-only">Abrir menu</span>
+          ☰
+        </button>
+      </nav>
+
+      <div
+        class="hidden border-t border-white/10 px-6 pb-6 md:hidden"
+        data-mobile-menu
+      >
+        <div class="flex flex-col gap-4 pt-4 text-sm font-medium">
+          <a href="#sobre">Sobre nós</a>
+          <a href="#conga">Conga</a>
+          <a href="#aria">Aria</a>
+          <a href="#contato">Contato</a>
+
+          <a
+            href="#contato"
+            class="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-3 gap-2 text-sm font-semibold text-white transition hover:bg-secondary/60"
+          >
+            Bora lá
+            <img src="./assets/icons/icon_arrow.png" alt="" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="relative overflow-hidden bg-primary text-white">
+        <img
+          src="./assets/images/element.png"
+          alt=""
+          class="pointer-events-none absolute left-1/2 top-1/2 z-0 w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-cover opacity-90 mix-blend-screen"
+        />
+
+        <div
+          class="relative z-10 mx-auto grid min-h-140 max-w-7xl grid-cols-1 items-center gap-10 px-6 py-10 lg:grid-cols-2 lg:px-8 lg:py-14"
+        >
+          <div class="max-w-2xl">
+            <h1
+              class="bg-linear-to-r from-[#7CBAD8] to-white bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent sm:text-5xl lg:text-6xl"
+            >
+              Tecnologia que nasce do campo
+            </h1>
+
+            <p class="mt-6 max-w-xl text-base leading-7 text-blue-100">
+              Somos um hub de aplicações para pecuária e produtores rurais.
+              Desenvolvemos soluções digitais nascidas da experiência real do
+              campo — porque nosso time também veio de lá.
+            </p>
+
+            <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="#contato"
+                class="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3 text-sm font-semibold text-white transition hover:bg-secondary/60"
+              >
+                Bora lá
+                <img src="./assets/icons/icon_arrow.png" alt="" />
+              </a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div
+              class="relative h-90 rounded-4xl border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./javascript/main.js"></script>
+  </body>
 </html>
