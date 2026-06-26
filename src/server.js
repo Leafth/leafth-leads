@@ -42,6 +42,39 @@ app.get("/api/leads", (req, res) => {
   });
 });
 
+app.get("/api/leads/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = `
+    SELECT 
+      id,
+      name,
+      email,
+      phone,
+      product,
+      status,
+      created_at
+    FROM leads
+    WHERE id = ?
+  `;
+
+  db.get(sql, [id], (error, row) => {
+    if (error) {
+      return res.status(500).json({
+        message: "Erro ao buscar lead.",
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        message: "Lead não encontrado.",
+      });
+    }
+
+    return res.json(row);
+  });
+});
+
 app.post("/api/leads", (req, res) => {
   const { name, email, phone, product } = req.body;
 
