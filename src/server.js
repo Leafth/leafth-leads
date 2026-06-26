@@ -122,6 +122,31 @@ app.patch("/api/leads/:id", (req, res) => {
   });
 });
 
+app.delete("/api/leads/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = `
+    DELETE FROM leads
+    WHERE id = ?
+  `;
+
+  db.run(sql, [id], function (error) {
+    if (error) {
+      return res.status(500).json({
+        message: "Erro ao deletar lead.",
+      });
+    }
+
+    if (this.changes === 0) {
+      return res.status(404).json({
+        message: "Lead não encontrado.",
+      });
+    }
+
+    return res.status(204).send();
+  });
+});
+
 app.listen(port, () => {
   console.log(`Aplicação rodando na porta ${port}`);
 });
