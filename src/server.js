@@ -42,6 +42,99 @@ app.get("/api/leads", (req, res) => {
   });
 });
 
+app.get("/api/leads/summary", (req, res) => {
+  const sql = `
+    SELECT
+      COUNT(*) AS total_leads,
+
+      SUM(
+        CASE 
+          WHEN product = 'conga'
+          THEN 1 ELSE 0
+        END
+      ) AS total_conga,
+
+      SUM(
+        CASE 
+          WHEN product = 'aria'
+          THEN 1 ELSE 0
+        END
+      ) AS total_aria,
+
+      SUM(
+        CASE 
+          WHEN product = 'ambos'
+          THEN 1 ELSE 0
+        END
+      ) AS total_ambos,
+
+      SUM(
+        CASE 
+          WHEN product = 'personalizado'
+          THEN 1 ELSE 0
+        END
+      ) AS total_personalizado,
+
+      SUM(
+        CASE 
+          WHEN status = 'convertido'
+          THEN 1 ELSE 0
+        END
+      ) AS convertidos
+    FROM leads
+  `;
+
+  db.get(sql, [], (error, row) => {
+    if (error) {
+      return res.status(500).json({
+        message: "Erro ao buscar resumo dos leads.",
+      });
+    }
+
+    return res.json({
+      totalLeads: row.total_leads || 0,
+      totalConga: row.total_conga || 0,
+      totalAria: row.total_aria || 0,
+      totalAmbos: row.total_ambos || 0,
+      totalPersonalizado: row.total_personalizado || 0,
+      convertidos: row.convertidos || 0,
+    });
+  });
+});
+
+app.get("/api/leads/pipeline", (req, res) => {
+  const sql = `
+    SELECT
+      status,
+      COUNT(*) AS total
+    FROM leads
+    GROUP BY status
+  `;
+
+  db.all(sql, [], (error, rows) => {
+    if (error) {
+      return res.status(500).json({
+        message: "Erro ao buscar pipeline dos leads.",
+      });
+    }
+
+    const pipeline = {
+      novo: 0,
+      em_contato: 0,
+      interessado: 0,
+      proposta: 0,
+      convertido: 0,
+      perdido: 0,
+    };
+
+    rows.forEach((row) => {
+      pipeline[row.status] = row.total;
+    });
+
+    return res.json(pipeline);
+  });
+});
+
 app.get("/api/leads/:id", (req, res) => {
   const { id } = req.params;
 
