@@ -24,7 +24,7 @@ db.serialize(() => {
         product IN ('conga', 'aria', 'ambos', 'personalizado')
       ),
       status TEXT NOT NULL DEFAULT 'novo' CHECK (
-        status IN ('novo', 'em_contato', 'interessado', 'convertido', 'perdido')
+        status IN ('novo', 'em_contato', 'interessado', 'proposta', 'convertido', 'perdido')
       ),
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
