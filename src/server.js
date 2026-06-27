@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const db = require("./database");
 
 const app = express();
@@ -16,6 +17,8 @@ const VALID_STATUSES = [
 ];
 
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/api/leads", (req, res) => {
   const sql = `
