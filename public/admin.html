@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./css/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Painel de Leads</title>
+  </head>
+
+  <body class="min-h-screen bg-[#f8faf9] font-sans text-slate-900">
+    <header class="border-b border-slate-100 bg-white">
+      <div
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5"
+      >
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900">Painel de Leads</h1>
+          <p class="text-sm text-slate-400" data-total-label>0 contatos</p>
+        </div>
+
+        <button
+          type="button"
+          data-export-csv
+          class="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-200"
+        >
+          <img src="./assets/icons/icon_download.png" alt="">
+          Exportar CSV
+        </button>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-6 py-10">
+      <section class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <article
+          class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm"
+        >
+          <div class="flex items-center justify-between">
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600"
+            >
+              <img src="./assets/icons/icon_peoples.png" alt="">
+            </div>
+
+            <strong class="text-4xl font-bold text-blue-600" data-total-leads>
+              0
+            </strong>
+          </div>
+
+          <p class="mt-5 text-lg font-medium text-slate-500">Total de Leads</p>
+        </article>
+
+        <article
+          class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm"
+        >
+          <div class="flex items-center justify-between">
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600"
+            >
+              <img src="./assets/icons/icon_line.png" alt="">
+            </div>
+
+            <strong class="text-4xl font-bold text-blue-600" data-total-aria>
+              0
+            </strong>
+          </div>
+
+          <p class="mt-5 text-lg font-medium text-slate-500">Interesse ARIA</p>
+        </article>
+
+        <article
+          class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm"
+        >
+          <div class="flex items-center justify-between">
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600"
+            >
+              <img src="./assets/icons/icon_insights.png" alt="">
+            </div>
+
+            <strong class="text-4xl font-bold text-blue-600" data-total-conga>
+              0
+            </strong>
+          </div>
+
+          <p class="mt-5 text-lg font-medium text-slate-500">Interesse ConGa</p>
+        </article>
+
+        <article
+          class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm"
+        >
+          <div class="flex items-center justify-between">
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600"
+            >
+              <img src="./assets/icons/icon_arrow_up.png" alt="">
+            </div>
+
+            <strong class="text-4xl font-bold text-blue-600" data-convertidos>
+              0
+            </strong>
+          </div>
+
+          <p class="mt-5 text-lg font-medium text-slate-500">Convertidos</p>
+        </article>
+      </section>
+
+      <section class="mt-8 rounded-2xl border border-slate-100 bg-white p-6">
+        <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">
+          Pipeline
+        </h2>
+
+        <div class="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+          <article
+            class="rounded-xl border border-slate-100 bg-slate-50 p-5 text-center"
+          >
+            <strong
+              class="text-3xl font-bold text-slate-400"
+              data-pipeline="novo"
+              >0</strong
+            >
+            <p class="mt-2 text-sm text-slate-400">
+              <span class="text-slate-400">●</span> Novo
+            </p>
+          </article>
+
+          <article
+            class="rounded-xl border border-slate-100 bg-slate-50 p-5 text-center"
+          >
+            <strong
+              class="text-3xl font-bold text-slate-400"
+              data-pipeline="em_contato"
+              >0</strong
+            >
+            <p class="mt-2 text-sm text-slate-400">
+              <span class="text-blue-500">●</span> Em contato
+            </p>
+          </article>
+
+          <article
+            class="rounded-xl border border-slate-100 bg-slate-50 p-5 text-center"
+          >
+            <strong
+              class="text-3xl font-bold text-slate-400"
+              data-pipeline="interessado"
+              >0</strong
+            >
+            <p class="mt-2 text-sm text-slate-400">
+              <span class="text-violet-500">●</span> Qualificado
+            </p>
+          </article>
+
+          <article
+            class="rounded-xl border border-slate-100 bg-slate-50 p-5 text-center"
+          >
+            <strong
+              class="text-3xl font-bold text-slate-400"
+              data-pipeline="proposta"
+              >0</strong
+            >
+            <p class="mt-2 text-sm text-slate-400">
+              <span class="text-amber-500">●</span> Proposta
+            </p>
+          </article>
+
+          <article
+            class="rounded-xl border border-slate-100 bg-slate-50 p-5 text-center"
+          >
+            <strong
+              class="text-3xl font-bold text-slate-400"
+              data-pipeline="convertido"
+              >0</strong
+            >
+            <p class="mt-2 text-sm text-slate-400">
+              <span class="text-emerald-500">●</span> Convertido
+            </p>
+          </article>
+
+          <article
+            class="rounded-xl border border-slate-100 bg-slate-50 p-5 text-center"
+          >
+            <strong
+              class="text-3xl font-bold text-slate-400"
+              data-pipeline="perdido"
+              >0</strong
+            >
+            <p class="mt-2 text-sm text-slate-400">
+              <span class="text-red-500">●</span> Descartado
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="mt-8 rounded-2xl border border-slate-100 bg-white p-6">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-[1fr_220px_220px]">
+          <input
+            data-search
+            type="text"
+            placeholder="Buscar nome, e-mail ou cidade..."
+            class="h-14 rounded-2xl border border-slate-200 bg-slate-50 px-6 text-sm outline-none transition placeholder:text-slate-300 focus:border-blue-300 focus:bg-white"
+          />
+
+          <select
+            data-system-filter
+            class="h-14 rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm text-slate-500 outline-none transition focus:border-blue-300 focus:bg-white"
+          >
+            <option value="">Todos os sistemas</option>
+            <option value="aria">ARIA</option>
+            <option value="conga">ConGa</option>
+            <option value="ambos">Ambos</option>
+            <option value="personalizado">Personalizado</option>
+          </select>
+
+          <select
+            data-status-filter
+            class="h-14 rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm text-slate-500 outline-none transition focus:border-blue-300 focus:bg-white"
+          >
+            <option value="">Todos os status</option>
+            <option value="novo">Novo</option>
+            <option value="em_contato">Em contato</option>
+            <option value="interessado">Qualificado</option>
+            <option value="proposta">Proposta</option>
+            <option value="convertido">Convertido</option>
+            <option value="perdido">Descartado</option>
+          </select>
+        </div>
+      </section>
+
+      <section
+        class="mt-8 overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm"
+      >
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-225 text-left">
+            <thead
+              class="bg-slate-50 text-xs font-bold uppercase tracking-wider text-slate-400"
+            >
+              <tr>
+                <th class="px-6 py-5">Nome</th>
+                <th class="px-6 py-5">E-mail</th>
+                <th class="px-6 py-5">Cidade</th>
+                <th class="px-6 py-5">Sistema</th>
+                <th class="px-6 py-5">Status</th>
+                <th class="px-6 py-5">Data</th>
+              </tr>
+            </thead>
+
+            <tbody data-leads-table class="divide-y divide-slate-100">
+              <tr>
+                <td
+                  colspan="6"
+                  class="px-6 py-10 text-center text-sm text-slate-400"
+                >
+                  Carregando leads...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="mt-8 text-center text-sm text-slate-300" data-showing-label>
+        Mostrando 0 de 0 leads
+      </p>
+    </main>
+  </body>
+</html>
