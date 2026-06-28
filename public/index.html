@@ -5,40 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/output.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap"
       rel="stylesheet"
     />
     <title>Leafth</title>
   </head>
   <body>
-    <header class="bg-primary text-white">
+    <header
+      class="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur w-full"
+    >
       <nav
-        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-8"
+        class="mx-auto flex max-w-7xl items-center justify-between py-4 w-full"
       >
         <a href="#" class="flex items-center gap-2">
-          <img src="./assets/icons/icon_logo.png" alt="" />
-
-          <span class="text-xl font-bold tracking-tight">Leafth</span>
+          <h1 class="text-2xl font-bold text-slate-900">Leafth</h1>
         </a>
 
-        <div class="hidden items-center gap-8 text-sm font-medium md:flex">
-          <a href="#sobre" class="transition hover:text-secondary">Sobre nós</a>
-          <a href="#conga" class="transition hover:text-secondary">Conga</a>
-          <a href="#aria" class="transition hover:text-secondary">Aria</a>
-          <a href="#contato" class="transition hover:text-secondary">Contato</a>
-        </div>
-
-        <a
-          href="#contato"
-          class="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-3 gap-2 text-sm font-semibold text-white transition hover:bg-secondary/60"
+        <div
+          class="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex"
         >
-          Bora lá
-          <img src="./assets/icons/icon_arrow.png" alt="" />
-        </a>
+          <a href="#sobre" class="transition hover:text-primary">Sobre nós</a>
+          <a href="#aria" class="transition hover:text-primary">ARIA</a>
+          <a href="#conga" class="transition hover:text-primary">ConGa</a>
 
+          <a
+            href="#contato"
+            class="hidden rounded-full bg-primary-dark px-5 py-2.5 text-sm font-semibold text-white transition bg-black hover:bg-primary md:inline-flex"
+          >
+            Entre em Contato
+          </a>
+        </div>
         <button
           type="button"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 md:hidden"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 text-slate-700 md:hidden"
           data-menu-button
         >
           <span class="sr-only">Abrir menu</span>
@@ -47,208 +46,238 @@
       </nav>
 
       <div
-        class="hidden border-t border-white/10 px-6 pb-6 md:hidden"
+        class="hidden border-t border-slate-100 bg-white px-6 pb-6 md:hidden"
         data-mobile-menu
       >
-        <div class="flex flex-col gap-4 pt-4 text-sm font-medium">
+        <div
+          class="flex flex-col gap-4 pt-4 text-sm font-medium text-slate-700"
+        >
           <a href="#sobre">Sobre nós</a>
-          <a href="#conga">Conga</a>
-          <a href="#aria">Aria</a>
-          <a href="#contato">Contato</a>
-
+          <a href="#aria">ARIA</a>
+          <a href="#conga">ConGa</a>
           <a
             href="#contato"
-            class="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-3 gap-2 text-sm font-semibold text-white transition hover:bg-secondary/60"
+            class="rounded-full bg-primary-dark px-5 py-3 text-center font-semibold text-white"
           >
-            Bora lá
-            <img src="./assets/icons/icon_arrow.png" alt="" />
+            Entre em Contato
           </a>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="relative overflow-hidden bg-primary text-white">
-        <img
-          src="./assets/images/element.png"
-          alt=""
-          class="pointer-events-none absolute left-1/2 top-1/2 z-0 w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-cover opacity-90 mix-blend-screen"
-        />
-
-        <div
-          class="relative z-10 mx-auto grid min-h-140 max-w-7xl grid-cols-1 gap-10 px-6 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-14"
-        >
-          <div class="max-w-3xl">
-            <h1
-              class="bg-linear-to-t from-[#7CBAD8] to-white bg-clip-text text-4xl font-bold leading-tight tracking-tight text-transparent sm:text-5xl lg:text-6xl"
-            >
-              Tecnologia que nasce
-              <br />
-              do campo
-            </h1>
-
-            <p class="mt-6 max-w-xl text-base leading-7 text-blue-100">
-              Somos um hub de aplicações para pecuária e produtores rurais.
-              Desenvolvemos soluções digitais nascidas da experiência real do
-              campo — porque nosso time também veio de lá.
-            </p>
-            <div class="mt-8 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#contato"
-                class="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3 text-sm font-semibold text-white transition hover:bg-secondary-hover"
-              >
-                Bora lá
-                <img src="./assets/icons/icon_arrow.png" alt="" />
-              </a>
-            </div>
-          </div>
-
-          <div class="relative">
-            <div
-              class="relative h-90 rounded-4xl border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur"
-            ></div>
-          </div>
-        </div>
-      </section>
-      <section id="produtos" class="relative z-20 -mt-20 px-6">
-        <div
-          class="mx-auto max-w-6xl rounded-3xl bg-white px-8 py-10 shadow-2xl shadow-slate-900/10"
-        >
-          <h2 class="text-center text-3xl font-semibold text-slate-700">
-            Escale com nossos serviços
-          </h2>
+      <section class="bg-background px-6 pb-16 pt-20 lg:px-8 lg:pb-20 lg:pt-24">
+        <div class="mx-auto max-w-7xl">
+          <span
+            class="text-xs font-bold uppercase tracking-[0.2em] text-secondary"
+          >
+            Hub pecuário
+          </span>
 
           <div
-            class="mx-auto mt-10 grid max-w-4xl grid-cols-1 justify-items-center gap-12 md:grid-cols-2"
+            class="mt-6 grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.05fr_0.95fr]"
           >
-            <article class="flex w-full max-w-sm flex-col items-start gap-2">
-              <div
-                class="flex h-16 w-16 shrink-0 items-center justify-center rounded bg-slate-100"
+            <div>
+              <h1
+                class="max-w-3xl text-5xl font-extrabold leading-[1.08] tracking-tight text-slate-900 lg:text-7xl"
               >
-                <img
-                  src="./assets/icons/icon_logo_dark.png"
-                  alt=""
-                  class="h-16 w-16"
-                />
-              </div>
+                Tecnologia que
+                <span
+                  class="block bg-linear-to-r from-[#4F9CF9] to-[#24617e] bg-clip-text text-transparent"
+                >
+                  nasce do campo
+                </span>
+              </h1>
 
-              <div>
-                <h3 class="text-xl font-semibold text-slate-900">ConGa</h3>
+              <p class="mt-6 max-w-2xl text-base leading-7 text-muted text-gray-500">
+                Somos um hub de aplicações para pecuária e produtores rurais.
+                Desenvolvemos soluções digitais nascidas da experiência real do
+                campo porque nosso time também veio de lá.
+              </p>
 
-                <p class="mt-3 max-w-sm text-sm leading-6 text-slate-600">
-                  Digitaliza e centraliza o controle reprodutivo e do ciclo de
-                  vida do rebanho bovino, seja por inseminação artificial ou
-                  monta natural.
-                </p>
+              <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href="#aria"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-primary-dark px-6 py-3 text-sm font-semibold text-white transition bg-primary hover:bg-primary-hover"
+                >
+                  Conheça o ARIA
+                  <span>→</span>
+                </a>
 
                 <a
                   href="#conga"
-                  class="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-sm font-semibold text-white transition hover:bg-secondary-hover"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white transition hover:bg-secondary-hover"
                 >
                   Conheça o ConGa
-                  <img src="./assets/icons/icon_arrow.png" alt="" />
+                  <span>→</span>
                 </a>
               </div>
+            </div>
+          </div>
+
+          <div class="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3">
+            <article
+              class="rounded-xl border border-emerald-100 bg-white p-7 shadow-sm"
+            >
+              <div
+                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-50 text-emerald-500"
+              >
+                <img src="./assets/icons/icon_shield.png" alt="">
+              </div>
+
+              <h3 class="text-sm font-bold text-slate-900">Excelência</h3>
+
+              <p class="mt-3 text-sm leading-6 text-muted text-gray-500">
+                Entregamos soluções robustas e confiáveis, construídas com rigor
+                técnico para suportar a operação do campo todos os dias.
+              </p>
             </article>
 
-            <article class="flex w-full max-w-sm flex-col items-start gap-2">
+            <article
+              class="rounded-xl border border-blue-100 bg-white p-7 shadow-sm"
+            >
               <div
-                class="flex h-16 w-16 shrink-0 items-center justify-center rounded bg-slate-100"
+                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-secondary"
               >
+                <img src="./assets/icons/icon_ray.png" alt="">
+              </div>
+
+              <h3 class="text-sm font-bold text-slate-900">Criatividade</h3>
+
+              <p class="mt-3 text-sm leading-6 text-muted text-gray-500">
+                Cada desafio do agronegócio inspira uma nova solução. Inovamos
+                com propósito, criando ferramentas que realmente fazem
+                diferença.
+              </p>
+            </article>
+
+            <article
+              class="rounded-xl border border-yellow-200 bg-white p-7 shadow-sm"
+            >
+              <div
+                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-yellow-50 text-yellow-500"
+              >
+                <img src="./assets/icons/Icon_target.png" alt="">
+              </div>
+
+              <h3 class="text-sm font-bold text-slate-900">Disciplina</h3>
+
+              <p class="mt-3 text-sm leading-6 text-muted text-gray-500">
+                Nascemos em família de agricultores e sabemos que consistência e
+                comprometimento são a base de qualquer colheita bem-sucedida.
+              </p>
+            </article>
+          </div>
+
+          <div class="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <article
+              id="aria"
+              class="rounded-xl border-t-2 border-primary bg-white p-7 shadow-sm"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-3xl font-bold text-primary">ARIA</h2>
+                  <p class="mt-1 text-sm text-muted text-gray-500">
+                    Assistente de Reprodução e Inseminação Artificial
+                  </p>
+                </div>
+
                 <img
-                  src="./assets/icons/icon_logo_dark.png"
+                  src="./assets/icons/icon_logo_dark_aria.png"
                   alt=""
-                  class="h-16 w-16"
+                  class="h-12 w-12"
                 />
               </div>
 
-              <div>
-                <h3 class="text-xl font-semibold text-slate-900">ARIA</h3>
+              <p class="mt-5 text-sm leading-6 text-muted text-gray-500">
+                Centralize o controle reprodutivo e o ciclo de vida do rebanho,
+                acompanhando inseminações, montas naturais e indicadores.
+              </p>
 
-                <p class="mt-3 max-w-sm text-sm leading-6 text-slate-600">
-                  Otimiza o gerenciamento de despesas e produção de leite,
-                  automatiza o controle de receitas e viabiliza a geração de
-                  relatórios para tomada de decisão.
-                </p>
-
-                <a
-                  href="#aria"
-                  class="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-sm font-semibold text-white transition hover:bg-secondary-hover"
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span
+                  class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-primary"
                 >
-                  Conheça o ARIA
-                  <img src="./assets/icons/icon_arrow.png" alt="" />
-                </a>
+                  Ciclo Reprodutivo
+                </span>
+                <span
+                  class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-primary"
+                >
+                  IA & Monta Natural
+                </span>
+                <span
+                  class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-primary"
+                >
+                  Histórico Individual
+                </span>
+                <span
+                  class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-primary"
+                >
+                  Alertas
+                </span>
               </div>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section id="sobre" class="bg-white px-6 pb-24 pt-28">
-        <div class="mx-auto max-w-7xl">
-          <div class="mx-auto max-w-2xl text-center">
-            <h2 class="text-3xl font-semibold leading-tight text-slate-800">
-              Compre nosso produto porque<br />
-              é muito bom
-            </h2>
 
-            <p class="mt-3 text-sm text-slate-400">É o que a gente faz bom?</p>
-          </div>
-
-          <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            <article
-              class="rounded-2xl bg-white px-8 py-8 text-center shadow-lg shadow-slate-900/5"
-            >
-              <div
-                class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-green-50"
+              <a
+                href="#aria-detalhes"
+                class="mt-6 inline-flex text-sm font-bold text-primary"
               >
-                <img src="./assets/icons/icon_peoples.png" alt="" class="w-8 h-8">
-              </div>
-
-              <h3 class="mt-5 text-xl font-bold text-slate-700">
-                5 Devs<br />
-                Especializados
-              </h3>
-
-              <p class="mt-3 text-sm leading-6 text-slate-500">
-                Nosso time une experiência em tecnologia com vivência real no
-                campo.
-              </p>
+                Ver detalhes →
+              </a>
             </article>
 
             <article
-              class="rounded-2xl bg-white px-8 py-8 text-center shadow-lg shadow-slate-900/5"
+              id="conga"
+              class="rounded-xl border-t-2 border-secondary bg-white p-7 shadow-sm"
             >
-              <div
-                class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-green-50"
-              >
-                <img src="./assets/icons/icon_factory.png" alt="" class="w-7 h-7">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-3xl font-bold text-secondary">ConGa</h2>
+                  <p class="mt-1 text-sm text-muted text-gray-500">
+                    Gestão Financeira da Produção de Leite
+                  </p>
+                </div>
+
+                <img
+                  src="./assets/icons/icon_logo_conga.png"
+                  alt=""
+                  class="h-9 w-9"
+                />
               </div>
 
-              <h3 class="mt-5 text-xl font-bold text-slate-700">
-                2 Sistemas Ativos
-              </h3>
-
-              <p class="mt-3 text-sm leading-6 text-slate-500">
-                Soluções digitais focadas em gestão pecuária, produção e tomada
-                de decisão.
+              <p class="mt-5 text-sm leading-6 text-muted text-gray-500">
+                Controle despesas, receitas e produção de leite com cálculos
+                automáticos e relatórios para apoiar a tomada de decisão.
               </p>
-            </article>
 
-            <article
-              class="rounded-2xl bg-white px-8 py-8 text-center shadow-lg shadow-slate-900/5"
-            >
-              <div
-                class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-green-50"
-              >
-                <img src="./assets/icons/icon_hands.png" alt="" class="w-7 h-7">
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span
+                  class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-secondary"
+                >
+                  Gestão Financeira
+                </span>
+                <span
+                  class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-secondary"
+                >
+                  Produção de Leite
+                </span>
+                <span
+                  class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-secondary"
+                >
+                  Relatórios
+                </span>
+                <span
+                  class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-secondary"
+                >
+                  Multi produtor
+                </span>
               </div>
 
-              <h3 class="mt-5 text-xl font-bold text-slate-700">Nós é bem</h3>
-
-              <p class="mt-3 text-sm leading-6 text-slate-500">
-                Pensamos cada detalhe para tornar a gestão rural mais simples,
-                acessível e eficiente.
-              </p>
+              <a
+                href="#conga-detalhes"
+                class="mt-6 inline-flex text-sm font-bold text-secondary"
+              >
+                Ver detalhes →
+              </a>
             </article>
           </div>
         </div>
