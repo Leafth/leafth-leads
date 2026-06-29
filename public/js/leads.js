@@ -56,6 +56,8 @@ const totalAriaCard = document.querySelector("[data-total-aria]");
 const totalCongaCard = document.querySelector("[data-total-conga]");
 const convertidosCard = document.querySelector("[data-convertidos]");
 
+const exportCsvButton = document.querySelector("[data-export-csv]");
+
 function formatDate(dateValue) {
   if (!dateValue) return "-";
 
@@ -293,6 +295,82 @@ async function updateLeadStatus(leadId, status) {
   return response.json();
 }
 
+function escapeCsvValue(value) {
+  if (value === null || value === undefined) return "";
+
+  const stringValue = String(value).replace(/"/g, '""');
+
+  return `"${stringValue}"`;
+}
+
+function convertLeadsToCsv(leads) {
+  const headers = [
+    "Nome",
+    "E-mail",
+    "Telefone",
+    "Cidade",
+    "Sistema",
+    "Status",
+    "Data",
+  ];
+
+  const rows = leads.map((lead) => [
+    lead.name,
+    lead.email,
+    formatPhone(lead.phone),
+    lead.city || "",
+    productLabels[lead.product] || lead.product,
+    statusLabels[lead.status] || lead.status,
+    formatDate(lead.created_at),
+  ]);
+
+  const csvContent = [headers, ...rows]
+    .map((row) => row.map(escapeCsvValue).join(";"))
+    .join("\n");
+
+  return csvContent;
+}
+
+function downloadCsv(csvContent) {
+  const blob = new Blob(["\uFEFF" + csvContent], {
+    type: "text/csv;charset=utf-8;",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = `leads-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+async function exportLeadsCsv() {
+  try {
+    exportCsvButton.disabled = true;
+    exportCsvButton.classList.add("opacity-60", "cursor-wait");
+
+    const response = await fetch("/api/leads");
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar leads para exportação.");
+    }
+
+    const leads = await response.json();
+    const csvContent = convertLeadsToCsv(leads);
+
+    downloadCsv(csvContent);
+  } catch (error) {
+    alert("Não foi possível exportar os leads.");
+
+    console.error(error);
+  } finally {
+    exportCsvButton.disabled = false;
+    exportCsvButton.classList.remove("opacity-60", "cursor-wait");
+  }
+}
+
 leadsTable.addEventListener("change", async (event) => {
   const select = event.target.closest("[data-lead-status]");
 
@@ -332,3 +410,5 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSummary();
   loadPipeline();
 });
+
+exportCsvButton.addEventListener("click", exportLeadsCsv);
