@@ -9,12 +9,24 @@
   --color-primary: #043873;
   --color-secondary: #4f9cf9;
   --color-white: #ffffff;
-  --color-primary-hover: #1A4792;
+  --color-primary-hover: #1a4792;
   --color-secondary-hover: #2f83e6;
 }
 
 @layer base {
   body {
     font-family: var(--font-sans);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
