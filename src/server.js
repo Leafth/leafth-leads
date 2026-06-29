@@ -31,6 +31,7 @@ app.get("/api/leads", (req, res) => {
       name,
       email,
       phone,
+      city,
       product,
       status,
       created_at
@@ -151,6 +152,7 @@ app.get("/api/leads/:id", (req, res) => {
       name,
       email,
       phone,
+      city,
       product,
       status,
       created_at
@@ -176,7 +178,7 @@ app.get("/api/leads/:id", (req, res) => {
 });
 
 app.post("/api/leads", (req, res) => {
-  const { name, email, phone, product } = req.body;
+  const { name, email, phone, city, product } = req.body;
 
   if (!name || !email || !phone || !product) {
     return res.status(400).json({
@@ -191,11 +193,11 @@ app.post("/api/leads", (req, res) => {
   }
 
   const sql = `
-    INSERT INTO leads (name, email, phone, product)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO leads (name, email, phone, city, product)
+    VALUES (?, ?, ?, ?, ?)
   `;
 
-  db.run(sql, [name, email, phone, product], function (error) {
+  db.run(sql, [name, email, phone, city, product], function (error) {
     if (error) {
       return res.status(500).json({
         message: "Erro ao criar lead.",
@@ -207,6 +209,7 @@ app.post("/api/leads", (req, res) => {
       name,
       email,
       phone,
+      city,
       product,
       status: "novo",
     });
