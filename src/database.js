@@ -20,6 +20,7 @@ db.serialize(() => {
       name TEXT NOT NULL,
       email TEXT NOT NULL,
       phone TEXT NOT NULL,
+      city TEXT NOT NULL,
       product TEXT NOT NULL CHECK (
         product IN ('conga', 'aria', 'ambos', 'personalizado')
       ),
