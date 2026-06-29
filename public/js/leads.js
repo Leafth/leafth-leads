@@ -248,6 +248,34 @@ async function loadSummary() {
   }
 }
 
+function updatePipeline(pipeline) {
+  Object.entries(pipeline).forEach(([status, total]) => {
+    const pipelineElement = document.querySelector(
+      `[data-pipeline="${status}"]`,
+    );
+
+    if (pipelineElement) {
+      pipelineElement.textContent = total || 0;
+    }
+  });
+}
+
+async function loadPipeline() {
+  try {
+    const response = await fetch("/api/leads/pipeline");
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar pipeline dos leads.");
+    }
+
+    const pipeline = await response.json();
+
+    updatePipeline(pipeline);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 leadsTable.addEventListener("change", (event) => {
   const select = event.target.closest("[data-lead-status]");
 
@@ -259,4 +287,5 @@ leadsTable.addEventListener("change", (event) => {
 document.addEventListener("DOMContentLoaded", () => {
   loadLeads();
   loadSummary();
+  loadPipeline();
 });
