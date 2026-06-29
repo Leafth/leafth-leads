@@ -56,7 +56,7 @@ export function renderLeads(leads) {
   if (leads.length === 0) {
     leadsTable.innerHTML = `
       <tr>
-        <td colspan="7" class="px-6 py-10 text-center text-sm text-slate-400">
+        <td colspan="8" class="px-6 py-10 text-center text-sm text-slate-400">
           Nenhum lead encontrado.
         </td>
       </tr>
@@ -117,6 +117,43 @@ export function renderLeads(leads) {
             ${formatDate(lead.created_at)}
           </td>
 
+          <td class="px-6 py-5">
+            <div data-actions-wrapper class="relative inline-block text-left">
+              <button
+                type="button"
+                data-actions-toggle
+                data-lead-id="${lead.id}"
+                aria-label="Abrir opções do lead"
+                class="cursor-pointer px-2 text-2xl leading-none text-slate-400 transition hover:text-slate-700"
+              >
+                ⋮
+              </button>
+
+              <div
+                data-actions-menu
+                class="absolute right-0 z-30 mt-2 hidden w-44 overflow-hidden rounded-xl border border-slate-100 bg-white shadow-lg"
+              >
+                <button
+                  type="button"
+                  data-view-lead
+                  data-lead-id="${lead.id}"
+                  class="block w-full px-4 py-3 text-left text-xs font-semibold text-slate-600 transition hover:bg-slate-50"
+                >
+                  Ver detalhes
+                </button>
+
+                <button
+                  type="button"
+                  data-delete-lead
+                  data-lead-id="${lead.id}"
+                  data-lead-name="${lead.name}"
+                  class="block w-full px-4 py-3 text-left text-xs font-semibold text-red-600 transition hover:bg-red-50"
+                >
+                  Deletar
+                </button>
+              </div>
+            </div>
+          </td>
         </tr>
       `;
     })
@@ -126,7 +163,7 @@ export function renderLeads(leads) {
 export function renderLeadsError() {
   leadsTable.innerHTML = `
     <tr>
-      <td colspan="7" class="px-6 py-10 text-center text-sm text-red-400">
+      <td colspan="8" class="px-6 py-10 text-center text-sm text-red-400">
         Erro ao carregar leads.
       </td>
     </tr>

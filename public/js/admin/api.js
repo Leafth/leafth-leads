@@ -44,6 +44,16 @@ export async function updateLeadStatus(leadId, status) {
   return response.json();
 }
 
+export async function getLeadById(leadId) {
+  const response = await fetch(`/api/leads/${leadId}`);
+
+  if (!response.ok) {
+    throw new Error("Erro ao buscar detalhes do lead.");
+  }
+
+  return response.json();
+}
+
 export async function deleteLead(leadId) {
   const response = await fetch(`/api/leads/${leadId}`, {
     method: "DELETE",
