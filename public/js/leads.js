@@ -51,6 +51,11 @@ const leadsTable = document.querySelector("[data-leads-table]");
 const totalLabel = document.querySelector("[data-total-label]");
 const showingLabel = document.querySelector("[data-showing-label]");
 
+const totalLeadsCard = document.querySelector("[data-total-leads]");
+const totalAriaCard = document.querySelector("[data-total-aria]");
+const totalCongaCard = document.querySelector("[data-total-conga]");
+const convertidosCard = document.querySelector("[data-convertidos]");
+
 function formatDate(dateValue) {
   if (!dateValue) return "-";
 
@@ -220,6 +225,29 @@ async function loadLeads() {
   }
 }
 
+function updateSummary(summary) {
+  totalLeadsCard.textContent = summary.totalLeads || 0;
+  totalAriaCard.textContent = summary.totalAria += summary.totalAmbos || 0;
+  totalCongaCard.textContent = summary.totalConga += summary.totalAmbos || 0;
+  convertidosCard.textContent = summary.convertidos || 0;
+}
+
+async function loadSummary() {
+  try {
+    const response = await fetch("/api/leads/summary");
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar resumo dos leads.");
+    }
+
+    const summary = await response.json();
+
+    updateSummary(summary);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 leadsTable.addEventListener("change", (event) => {
   const select = event.target.closest("[data-lead-status]");
 
@@ -228,4 +256,7 @@ leadsTable.addEventListener("change", (event) => {
   applyStatusStyle(select);
 });
 
-document.addEventListener("DOMContentLoaded", loadLeads);
+document.addEventListener("DOMContentLoaded", () => {
+  loadLeads();
+  loadSummary();
+});
