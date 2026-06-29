@@ -656,6 +656,30 @@
         </div>
       </section>
     </main>
+    <div
+      id="toast"
+      class="pointer-events-none fixed right-6 top-6 z-9999 hidden max-w-sm rounded-2xl border bg-white p-4 shadow-xl"
+    >
+      <div class="flex items-start gap-3">
+        <div
+          id="toastIcon"
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold"
+        ></div>
+
+        <div>
+          <strong
+            id="toastTitle"
+            class="block text-sm font-bold text-slate-900"
+          >
+          </strong>
+
+          <p
+            id="toastMessage"
+            class="mt-1 text-sm leading-5 text-slate-500"
+          ></p>
+        </div>
+      </div>
+    </div>
     <script type="module" src="./js/form/main.js"></script>
   </body>
 </html>
