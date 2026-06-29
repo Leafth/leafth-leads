@@ -168,6 +168,7 @@ function renderLeads(leads) {
               <select
                 data-lead-status
                 data-lead-id="${lead.id}"
+                data-current-status"${lead.status}"
                 class="cursor-pointer rounded-full border bg-white px-4 py-2 pr-9 text-xs font-bold outline-none transition hover:brightness-95 focus:ring-2 focus:ring-blue-100"
                 style="${getStatusStyle(lead.status)}"
               >
@@ -276,12 +277,54 @@ async function loadPipeline() {
   }
 }
 
-leadsTable.addEventListener("change", (event) => {
+async function updateLeadStatus(leadId, status) {
+  const response = await fetch(`/api/leads/${leadId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao atualizar status do lead.");
+  }
+
+  return response.json();
+}
+
+leadsTable.addEventListener("change", async (event) => {
   const select = event.target.closest("[data-lead-status]");
 
   if (!select) return;
 
+  const leadId = select.dataset.leadId;
+  const previousStatus = select.dataset.currentStatus;
+  const newStatus = select.value;
+
   applyStatusStyle(select);
+
+  select.disabled = true;
+  select.classList.add("opacity-60", "cursor-wait");
+
+  try {
+    await updateLeadStatus(leadId, newStatus);
+
+    select.dataset.currentStatus = newStatus;
+
+    await loadSummary();
+    await loadPipeline();
+  } catch (error) {
+    select.value = previousStatus;
+    applyStatusStyle(select);
+
+    alert("Não foi possível atualizar o status do lead.");
+
+    console.error(error);
+  } finally {
+    select.disabled = false;
+    select.classList.remove("opacity-60", "cursor-wait");
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
