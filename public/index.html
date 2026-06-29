@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +30,7 @@
 
           <a
             href="#contato"
-            class="hidden rounded-full bg-primary-dark px-5 py-2.5 text-sm font-semibold text-white transition bg-black hover:bg-primary md:inline-flex"
+            class="hidden rounded-full bg-primary-dark px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 ease-out bg-black hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-primary hover:shadow-lg md:inline-flex"
           >
             Entre em Contato
           </a>
@@ -100,7 +100,7 @@
               <div class="mt-8 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#aria"
-                  class="inline-flex items-center justify-center gap-2 rounded-full bg-primary-dark px-6 py-3 text-sm font-semibold text-white transition bg-primary hover:bg-primary-hover"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-primary-dark px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out bg-primary hover:-translate-y-1 hover:bg-primary-hover hover:shadow-lg active:translate-y-0"
                 >
                   Conheça o ARIA
                   <span>→</span>
@@ -108,7 +108,7 @@
 
                 <a
                   href="#conga"
-                  class="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white transition hover:bg-secondary-hover"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-secondary-hover hover:shadow-lg active:translate-y-0"
                 >
                   Conheça o ConGa
                   <span>→</span>
@@ -119,12 +119,12 @@
 
           <div class="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3">
             <article
-              class="rounded-xl border border-emerald-100 bg-white p-7 shadow-sm"
+              class="group rounded-xl border border-emerald-100 bg-white p-7 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl"
             >
               <div
-                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-50 text-emerald-500"
+                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-50 text-emerald-500 transition-transform duration-300 ease-out group-hover:scale-110"
               >
-                <img src="./assets/icons/icon_shield.png" alt="">
+                <img src="./assets/icons/icon_shield.png" alt="" />
               </div>
 
               <h3 class="text-sm font-bold text-slate-900">Excelência</h3>
@@ -136,10 +136,10 @@
             </article>
 
             <article
-              class="rounded-xl border border-blue-100 bg-white p-7 shadow-sm"
+              class="group rounded-xl border border-blue-100 bg-white p-7 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
             >
               <div
-                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-secondary"
+                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-secondary transition-transform duration-300 ease-out group-hover:scale-110"
               >
                 <img src="./assets/icons/icon_ray.png" alt="" />
               </div>
@@ -154,10 +154,10 @@
             </article>
 
             <article
-              class="rounded-xl border border-yellow-200 bg-white p-7 shadow-sm"
+              class="group rounded-xl border border-yellow-200 bg-white p-7 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-yellow-300 hover:shadow-xl"
             >
               <div
-                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-yellow-50 text-yellow-500"
+                class="mb-8 flex h-9 w-9 items-center justify-center rounded-full bg-yellow-50 text-yellow-500 transition-transform duration-300 ease-out group-hover:scale-110"
               >
                 <img src="./assets/icons/Icon_target.png" alt="" />
               </div>
@@ -220,7 +220,7 @@
               </div>
 
               <a
-                href="#aria-detalhes"
+                href="#aria"
                 class="mt-6 inline-flex text-sm font-bold text-primary"
               >
                 Ver detalhes →
@@ -275,7 +275,7 @@
               </div>
 
               <a
-                href="#conga-detalhes"
+                href="#conga"
                 class="mt-6 inline-flex text-sm font-bold text-secondary"
               >
                 Ver detalhes →
@@ -344,21 +344,22 @@
 
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">Telefone</label>
-                <input type="tel" id="telefone" class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition" placeholder="(00) 00000-0000" />
+                <input type="tel" id="telefone" class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition" placeholder="(00) 00000-0000" required/>
               </div>
 
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">Cidade / Estado</label>
-                <input type="text" id="cidade" class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition" placeholder="Ex: Uberlândia, MG" />
+                <input type="text" id="cidade" class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition" placeholder="Ex: Uberlândia, MG" required/>
               </div>
 
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">Sistema de Interesse</label>
-                <select id="sistema" class="mt-1 w-full appearance-none rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition">
+                <select id="sistema" class="mt-1 w-full cursor-pointer rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition" required>
                   <option value="" disabled selected>Selecione uma opção</option>
-                  <option value="ARIA">ARIA</option>
-                  <option value="ConGa">ConGa</option>
-                  <option value="Ambos">Ambos</option>
+                  <option value="aria">ARIA</option>
+                  <option value="conga">ConGa</option>
+                  <option value="ambos">Ambos</option>
+                  <option value="personalizado">Personalizado</option>
                 </select>
               </div>
 
@@ -367,7 +368,7 @@
                 <textarea id="mensagem" rows="3" class="mt-1 w-full resize-none rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition" placeholder="Conte sobre sua propriedade..."></textarea>
               </div>
 
-              <button type="submit" class="mt-2 md:col-span-2 flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+              <button type="submit" class="cursor-pointer mt-2 md:col-span-2 flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
                 Enviar mensagem
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
               </button>
@@ -376,6 +377,6 @@
         </div>
       </section>
     </main>
-    <script src="./javascript/main.js"></script>
+    <script type="module" src="./js/form/main.js"></script>
   </body>
 </html>
