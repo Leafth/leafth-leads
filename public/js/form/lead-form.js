@@ -1,5 +1,12 @@
 const leadForm = document.querySelector("#leadForm");
 
+const toast = document.querySelector("#toast");
+const toastIcon = document.querySelector("#toastIcon");
+const toastTitle = document.querySelector("#toastTitle");
+const toastMessage = document.querySelector("#toastMessage");
+
+let toastTimeout;
+
 async function createLead(leadData) {
   const response = await fetch("/api/leads", {
     method: "POST",
@@ -28,6 +35,33 @@ function getLeadFormData() {
   };
 }
 
+function showToast({ type, title, message }) {
+  clearTimeout(toastTimeout);
+
+  const isSuccess = type === "success";
+
+  toast.className = `
+    pointer-events-none fixed right-6 top-6 z-[9999] max-w-sm rounded-2xl border bg-white p-4 shadow-xl
+    ${isSuccess ? "border-emerald-100" : "border-red-100"}
+  `;
+
+  toastIcon.className = `
+    flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold
+    ${isSuccess ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"}
+  `;
+
+  toastIcon.textContent = isSuccess ? "✓" : "!";
+  toastTitle.textContent = title;
+  toastMessage.textContent = message;
+
+  toast.classList.remove("hidden");
+  toast.classList.add("animate-[fadeIn_0.2s_ease-out]");
+
+  toastTimeout = setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 4000);
+}
+
 leadForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -45,26 +79,22 @@ leadForm?.addEventListener("submit", async (event) => {
 
     leadForm.reset();
 
-    submitButton.classList.remove("opacity-60", "cursor-wait");
-    submitButton.classList.add("bg-emerald-600", "hover:bg-emerald-700");
-    submitButton.innerHTML = "Mensagem enviada com sucesso";
-
-    setTimeout(() => {
-      submitButton.classList.remove("bg-emerald-600", "hover:bg-emerald-700");
-      submitButton.innerHTML = originalButtonContent;
-      submitButton.disabled = false;
-    }, 4000);
+    showToast({
+      type: "success",
+      title: "Mensagem enviada!",
+      message: "Recebemos seu contato. Nossa equipe responderá em breve.",
+    });
   } catch (error) {
-    submitButton.classList.remove("opacity-60", "cursor-wait");
-    submitButton.classList.add("bg-red-600", "hover:bg-red-700");
-    submitButton.innerHTML = "Erro ao enviar. Tente novamente";
-
-    setTimeout(() => {
-      submitButton.classList.remove("bg-red-600", "hover:bg-red-700");
-      submitButton.innerHTML = originalButtonContent;
-      submitButton.disabled = false;
-    }, 4000);
+    showToast({
+      type: "error",
+      title: "Erro ao enviar",
+      message: "Não foi possível enviar sua mensagem. Tente novamente.",
+    });
 
     console.error(error);
+  } finally {
+    submitButton.classList.remove("opacity-60", "cursor-wait");
+    submitButton.innerHTML = originalButtonContent;
+    submitButton.disabled = false;
   }
 });
