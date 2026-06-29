@@ -20,6 +20,10 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "../public")));
 
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/admin.html"));
+});
+
 app.get("/api/leads", (req, res) => {
   const sql = `
     SELECT 
