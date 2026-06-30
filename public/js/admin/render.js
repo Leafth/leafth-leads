@@ -70,7 +70,7 @@ export function renderLeads(leads) {
       const statusStyle = statusStyles[lead.status] || statusStyles.novo;
 
       return `
-        <tr class="transition hover:bg-slate-50">
+        <tr class="transition hover:bg-slate-50 cursor-pointer">
           <td class="px-6 py-5 text-sm font-semibold text-slate-700">
             ${lead.name}
           </td>
