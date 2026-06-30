@@ -18,6 +18,7 @@ import {
 import { convertLeadsToCsv, downloadCsv } from "./csv.js";
 import { productLabels, statusLabels } from "./constants.js";
 import { formatDate, formatPhone } from "./formatters.js";
+import { searchInput, systemFilter, statusFilter } from "./dom.js";
 
 async function loadLeads() {
   try {
@@ -76,6 +77,24 @@ function toggleActionsMenu(button) {
   if (isHidden) {
     menu.classList.remove("hidden");
   }
+}
+
+function filterLeads(leads) {
+  const searchTerm = searchInput.value.toLowerCase();
+  const selectedSystem = systemFilter.value;
+  const selectedStatus = statusFilter.value;
+
+  return leads.filter((lead) => {
+    const matchesSearch = 
+      lead.name.toLowerCase().includes(searchTerm) ||
+      lead.email.toLowerCase().includes(searchTerm) ||
+      (lead.city && lead.city.toLowerCase().includes(searchTerm));
+
+    const matchesSystem = selectedSystem === "" || lead.product === selectedSystem;
+    const matchesStatus = selectedStatus === "" || lead.status === selectedStatus;
+
+    return matchesSearch && matchesSystem && matchesStatus;
+  });
 }
 
 async function exportLeadsCsv() {
