@@ -8,3 +8,7 @@ export const totalCongaCard = document.querySelector("[data-total-conga]");
 export const convertidosCard = document.querySelector("[data-convertidos]");
 
 export const exportCsvButton = document.querySelector("[data-export-csv]");
+
+export const searchInput = document.querySelector("[data-search]");
+export const systemFilter = document.querySelector("[data-system-filter]");
+export const statusFilter = document.querySelector("[data-status-filter]");
