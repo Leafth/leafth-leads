@@ -1,14 +1,14 @@
 import { productLabels, statusLabels, statusStyles } from "./constants.js";
-import { formatDate, formatPhone } from "./formatters.js";
 import {
+  convertidosCard,
   leadsTable,
-  totalLabel,
   showingLabel,
-  totalLeadsCard,
   totalAriaCard,
   totalCongaCard,
-  convertidosCard,
+  totalLabel,
+  totalLeadsCard,
 } from "./dom.js";
+import { formatDate, formatPhone } from "./formatters.js";
 
 export function getStatusStyle(status) {
   const style = statusStyles[status] || statusStyles.novo;
@@ -170,11 +170,12 @@ export function renderLeadsError() {
   `;
 }
 
-export function updateLabels(leads) {
-  const total = leads.length;
+export function updateLabels(filteredLeads, totalLeads) {
+  const total = totalLeads ?? filteredLeads.length;
+  const showing = filteredLeads.length;
 
   totalLabel.textContent = `${total} ${total === 1 ? "contato" : "contatos"}`;
-  showingLabel.textContent = `Mostrando ${total} de ${total} leads`;
+  showingLabel.textContent = `Mostrando ${showing} de ${total} leads`;
 }
 
 export function updateSummary(summary) {
