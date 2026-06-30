@@ -35,6 +35,40 @@ function formatFullDate(dateStr) {
   return `${datePart}, ${timePart}`;
 }
 
+function buildGmailLink(lead) {
+  if (!lead.email) return "#";
+
+  const subject = `Contato Leafth - ${lead.name || "Lead"}`;
+
+  const body = `
+Olá, ${lead.name || "tudo bem"}!
+
+Recebemos seu contato pelo site da Leafth e gostaríamos de conversar melhor sobre sua necessidade.
+
+Resumo do contato:
+- Nome: ${lead.name || "—"}
+- Telefone: ${formatPhone(lead.phone) || "—"}
+- Cidade: ${lead.city || "—"}
+- Sistema de interesse: ${productLabels[lead.product] || lead.product || "—"}
+- Status atual: ${statusLabels[lead.status] || lead.status || "—"}
+
+Podemos marcar uma conversa para entender melhor sua propriedade?
+
+Atenciosamente,
+Equipe Leafth
+  `.trim();
+
+  const params = new URLSearchParams({
+    view: "cm",
+    fs: "1",
+    to: lead.email,
+    su: subject,
+    body,
+  });
+
+  return `https://mail.google.com/mail/?${params.toString()}`;
+}
+
 function fillSheet(lead) {
   currentLeadId = lead.id;
 
@@ -61,7 +95,13 @@ function fillSheet(lead) {
     sheetMessageWrap.classList.add("hidden");
   }
 
-  sheetEmailLink.href = lead.email ? `mailto:${lead.email}` : "#";
+  sheetEmailLink.href = buildGmailLink(lead);
+  sheetEmailLink.target = "_blank";
+  sheetEmailLink.rel = "noopener noreferrer";
+
+  sheetEmailLink.classList.toggle("pointer-events-none", !lead.email);
+  sheetEmailLink.classList.toggle("opacity-50", !lead.email);
+
   sheetDeleteButton.dataset.leadId = lead.id;
   sheetDeleteButton.dataset.leadName = lead.name;
 }
@@ -70,7 +110,7 @@ export function openLeadSheet(lead) {
   fillSheet(lead);
 
   leadSheetOverlay.classList.remove("hidden");
-  // força reflow para a transição funcionar ao remover "hidden"
+
   requestAnimationFrame(() => {
     leadSheetOverlay.classList.add("opacity-100");
     leadSheet.classList.remove("translate-x-full");
@@ -86,7 +126,6 @@ export function closeLeadSheet() {
   document.body.classList.remove("overflow-hidden");
   currentLeadId = null;
 
-  // espera a transição terminar antes de esconder o overlay de fato
   setTimeout(() => {
     leadSheetOverlay.classList.add("hidden");
   }, 300);
@@ -97,10 +136,18 @@ export function getCurrentSheetLeadId() {
 }
 
 closeSheetButton.addEventListener("click", closeLeadSheet);
-leadSheetOverlay.addEventListener("click", closeLeadSheet);
+
+leadSheetOverlay.addEventListener("click", (event) => {
+  if (event.target === leadSheetOverlay) {
+    closeLeadSheet();
+  }
+});
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !leadSheet.classList.contains("translate-x-full")) {
+  if (
+    event.key === "Escape" &&
+    !leadSheet.classList.contains("translate-x-full")
+  ) {
     closeLeadSheet();
   }
 });
