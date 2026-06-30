@@ -1,30 +1,45 @@
-import { leadsTable, exportCsvButton } from "./dom.js";
 import {
-  getLeads,
-  getSummary,
-  getPipeline,
-  getLeadById,
-  updateLeadStatus,
   deleteLead,
+  getLeads,
+  getPipeline,
+  getSummary,
+  updateLeadStatus
 } from "./api.js";
+import { convertLeadsToCsv, downloadCsv } from "./csv.js";
+import { exportCsvButton, leadsTable, searchInput, statusFilter, systemFilter } from "./dom.js";
+import { filterLeads } from "./filters.js";
 import {
+  applyStatusStyle,
   renderLeads,
   renderLeadsError,
   updateLabels,
-  updateSummary,
   updatePipeline,
-  applyStatusStyle,
+  updateSummary,
 } from "./render.js";
-import { convertLeadsToCsv, downloadCsv } from "./csv.js";
-import { productLabels, statusLabels } from "./constants.js";
-import { formatDate, formatPhone } from "./formatters.js";
+
+let allLeads = [];
+
+function getActiveFilters() {
+  return {
+    search: searchInput.value,
+    system: systemFilter.value,
+    status: statusFilter.value,
+  };
+}
+
+function applyFiltersAndRender() {
+  const filtered = filterLeads(allLeads, getActiveFilters());
+
+  renderLeads(filtered);
+  updateLabels(filtered, allLeads.length);
+}
 
 async function loadLeads() {
   try {
     const leads = await getLeads();
 
-    renderLeads(leads);
-    updateLabels(leads);
+    allLeads = leads;
+    applyFiltersAndRender();
   } catch (error) {
     renderLeadsError();
     console.error(error);
@@ -115,6 +130,9 @@ leadsTable.addEventListener("change", async (event) => {
 
     select.dataset.currentStatus = newStatus;
 
+    const lead = allLeads.find((l) => String(l.id) === String(leadId));
+    if (lead) lead.status = newStatus;
+
     await loadSummary();
     await loadPipeline();
   } catch (error) {
@@ -173,5 +191,14 @@ document.addEventListener("click", (event) => {
 });
 
 exportCsvButton.addEventListener("click", exportLeadsCsv);
+
+let searchDebounceTimer;
+searchInput.addEventListener("input", () => {
+  clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(applyFiltersAndRender, 250);
+});
+
+systemFilter.addEventListener("change", applyFiltersAndRender);
+statusFilter.addEventListener("change", applyFiltersAndRender);
 
 document.addEventListener("DOMContentLoaded", refreshDashboard);
