@@ -7,6 +7,16 @@ const toastMessage = document.querySelector("#toastMessage");
 
 let toastTimeout;
 
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+const isValidPhone = (phone) => {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 11;
+};
+
 async function createLead(leadData) {
   const response = await fetch("/api/leads", {
     method: "POST",
@@ -64,6 +74,18 @@ function showToast({ type, title, message }) {
 
 leadForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const leadData = getLeadFormData();
+
+  if (!isValidEmail(leadData.email)) {
+    showToast({ type: "error", title: "Erro de validação", message: "Insira um e-mail válido." });
+    return;
+  }
+
+  if (leadData.phone && !isValidPhone(leadData.phone)) {
+    showToast({ type: "error", title: "Erro de validação", message: "Insira um telefone válido com DDD." });
+    return;
+  }
 
   const submitButton = leadForm.querySelector('button[type="submit"]');
   const originalButtonContent = submitButton.innerHTML;

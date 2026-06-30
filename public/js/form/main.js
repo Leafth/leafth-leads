@@ -9,7 +9,7 @@ menuButton?.addEventListener("click", () => {
 
 const telefoneInput = document.getElementById("telefone");
 
-telefoneInput.addEventListener("input", (e) => {
+telefoneInput?.addEventListener("input", (e) => {
   let value = e.target.value.replace(/\D/g, "");
   value = value.slice(0, 11);
 
