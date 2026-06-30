@@ -97,6 +97,15 @@ function filterLeads(leads) {
   });
 }
 
+[searchInput, systemFilter, statusFilter].forEach((element) => {
+  element.addEventListener("input", async () => {
+    const leads = await getLeads(); 
+    const filteredLeads = filterLeads(leads);
+    renderLeads(filteredLeads);
+    updateLabels(filteredLeads);
+  });
+});
+
 async function exportLeadsCsv() {
   try {
     exportCsvButton.disabled = true;
