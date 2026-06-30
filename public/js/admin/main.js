@@ -1,24 +1,22 @@
-import { leadsTable, exportCsvButton } from "./dom.js";
 import {
-  getLeads,
-  getSummary,
-  getPipeline,
-  getLeadById,
-  updateLeadStatus,
   deleteLead,
+  getLeadById,
+  getLeads,
+  getPipeline,
+  getSummary,
+  updateLeadStatus,
 } from "./api.js";
+import { convertLeadsToCsv, downloadCsv } from "./csv.js";
+import { exportCsvButton, leadsTable, searchInput, statusFilter, systemFilter } from "./dom.js";
 import {
+  applyStatusStyle,
   renderLeads,
   renderLeadsError,
   updateLabels,
-  updateSummary,
   updatePipeline,
-  applyStatusStyle,
+  updateSummary,
 } from "./render.js";
-import { convertLeadsToCsv, downloadCsv } from "./csv.js";
-import { productLabels, statusLabels } from "./constants.js";
-import { formatDate, formatPhone } from "./formatters.js";
-import { searchInput, systemFilter, statusFilter } from "./dom.js";
+import { closeLeadSheet, openLeadSheet } from "./sheet.js";
 
 async function loadLeads() {
   try {
@@ -85,7 +83,7 @@ function filterLeads(leads) {
   const selectedStatus = statusFilter.value;
 
   return leads.filter((lead) => {
-    const matchesSearch = 
+    const matchesSearch =
       lead.name.toLowerCase().includes(searchTerm) ||
       lead.email.toLowerCase().includes(searchTerm) ||
       (lead.city && lead.city.toLowerCase().includes(searchTerm));
@@ -99,7 +97,7 @@ function filterLeads(leads) {
 
 [searchInput, systemFilter, statusFilter].forEach((element) => {
   element.addEventListener("input", async () => {
-    const leads = await getLeads(); 
+    const leads = await getLeads();
     const filteredLeads = filterLeads(leads);
     renderLeads(filteredLeads);
     updateLabels(filteredLeads);
@@ -121,6 +119,17 @@ async function exportLeadsCsv() {
   } finally {
     exportCsvButton.disabled = false;
     exportCsvButton.classList.remove("opacity-60", "cursor-wait");
+  }
+}
+
+async function openLeadDetails(leadId) {
+  try {
+    const lead = await getLeadById(leadId);
+
+    openLeadSheet(lead);
+  } catch (error) {
+    alert("Não foi possível carregar os detalhes do lead.");
+    console.error(error);
   }
 }
 
@@ -160,9 +169,16 @@ leadsTable.addEventListener("change", async (event) => {
 leadsTable.addEventListener("click", async (event) => {
   const optionsButton = event.target.closest("[data-actions-toggle]");
   const deleteButton = event.target.closest("[data-delete-lead]");
+  const viewButton = event.target.closest("[data-view-lead]");
 
   if (optionsButton) {
     toggleActionsMenu(optionsButton);
+    return;
+  }
+
+  if (viewButton) {
+    closeActionsMenus();
+    await openLeadDetails(viewButton.dataset.leadId);
     return;
   }
 
@@ -189,6 +205,32 @@ leadsTable.addEventListener("click", async (event) => {
       deleteButton.disabled = false;
       deleteButton.classList.remove("opacity-60", "cursor-wait");
     }
+  }
+});
+
+// Botão "Deletar" dentro do próprio sheet de detalhes
+document.querySelector("[data-sheet-delete]")?.addEventListener("click", async (event) => {
+  const button = event.currentTarget;
+  const leadId = button.dataset.leadId;
+  const leadName = button.dataset.leadName;
+
+  const confirmed = confirm(`Deseja deletar o lead "${leadName}"?`);
+
+  if (!confirmed) return;
+
+  button.disabled = true;
+  button.classList.add("opacity-60", "cursor-wait");
+
+  try {
+    await deleteLead(leadId);
+    closeLeadSheet();
+    await refreshDashboard();
+  } catch (error) {
+    alert("Não foi possível deletar o lead.");
+    console.error(error);
+  } finally {
+    button.disabled = false;
+    button.classList.remove("opacity-60", "cursor-wait");
   }
 });
 
